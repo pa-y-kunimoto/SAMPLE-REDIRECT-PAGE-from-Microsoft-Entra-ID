@@ -1,0 +1,1 @@
+# SAMPLE-REDIRECT-PAGE-from-Microsoft-Entra-ID
