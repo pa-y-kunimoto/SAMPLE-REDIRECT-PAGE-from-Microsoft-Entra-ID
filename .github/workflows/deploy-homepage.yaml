@@ -19,6 +19,7 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: '20'
+        cache: 'npm'
 
     - name: Install dependencies
       run: npm install
@@ -30,10 +31,13 @@ jobs:
       run: npm run build
       working-directory: sample-react-app
     
-    - name: Save Artifacts
+    - name: Upload Built Artifacts
       uses: actions/upload-artifact@v4
       with:
         name: build_${{ github.sha }}
+        path: sample-react-app/dist
+        retention-days: 1
+        
     
   deploy:
     name: Deploy
@@ -43,11 +47,20 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
     
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm install
+
     - name: Download Artifacts
       uses: actions/download-artifact@v4
       with:
         name: build_${{ github.sha }}
+        path: downloaded/build
     
     - name: Deploy to GitHub Pages
-      run: npm run deploy
-      working-directory: sample-react-app
+      run: npx gh-pages -d downloaded/build -b gh-pages -u ${{ secrets.GITHUB_TOKEN }}
