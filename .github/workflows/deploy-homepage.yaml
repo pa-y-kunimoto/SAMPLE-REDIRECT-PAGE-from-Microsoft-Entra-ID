@@ -31,12 +31,11 @@ jobs:
       run: npm run build
       working-directory: sample-react-app
     
-    - name: Upload Built Artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: build_${{ github.sha }}
-        path: sample-react-app/dist
-        retention-days: 1
+    - name: Upload Static Files as Artifact
+        id: deployment
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: sample-react-app/dist
         
     
   deploy:
@@ -52,16 +51,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-    - name: Deploy
-      uses: actions/deploy-pages@v4
-      with:
-        artifact-name: build_${{ github.sha }}
-        token: ${{ secrets.GITHUB_TOKEN }}
-        publish-dir: sample-react-app/dist
-        branch: gh-pages
-        clean: true
-        commit-message: "Deploy ${{ github.sha }}"
-        enable-jekyll: false
-        keep-files: false
-        keep-history: false
-
+    - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
