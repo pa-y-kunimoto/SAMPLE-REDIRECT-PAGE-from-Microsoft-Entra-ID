@@ -28,7 +28,7 @@ jobs:
       run: npm run check
 
     - name: Build
-      run: npm run build
+      run: npm run predeploy
       working-directory: sample-react-app
     
     - name: Upload Static Files as Artifact
