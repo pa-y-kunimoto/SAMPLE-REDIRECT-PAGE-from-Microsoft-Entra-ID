@@ -1,0 +1,25 @@
+{
+	"name": "sample-redirect-page-from-microsoft-entra-id",
+	"private": true,
+	"workspaces": ["sample-react-app"],
+	"description": "",
+	"scripts": {
+		"fix": "biome check --write ./",
+		"check": "biome check ./",
+		"prepare": "husky"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/pa-y-kunimoto/SAMPLE-REDIRECT-PAGE-from-Microsoft-Entra-ID.git"
+	},
+	"keywords": ["react", "github-pages", "typescript"],
+	"author": "pa-y-kunimoto",
+	"bugs": {
+		"url": "https://github.com/pa-y-kunimoto/SAMPLE-REDIRECT-PAGE-from-Microsoft-Entra-ID/issues"
+	},
+	"homepage": "https://github.com/pa-y-kunimoto/SAMPLE-REDIRECT-PAGE-from-Microsoft-Entra-ID#readme",
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"husky": "9.1.6"
+	}
+}
