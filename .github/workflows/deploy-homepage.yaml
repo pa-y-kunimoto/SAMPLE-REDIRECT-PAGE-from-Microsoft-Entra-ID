@@ -25,7 +25,6 @@ jobs:
     
     - name: Prebuild
       run: npm run check
-      working-directory: sample-react-app
 
     - name: Build
       run: npm run build
