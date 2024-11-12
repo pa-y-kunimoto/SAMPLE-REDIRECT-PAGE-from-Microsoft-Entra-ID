@@ -1,0 +1,54 @@
+name: Deploy Homepage to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20'
+
+    - name: Install dependencies
+      run: npm install
+    
+    - name: Prebuild
+      run: npm run check
+      working-directory: sample-react-app
+
+    - name: Build
+      run: npm run build
+      working-directory: sample-react-app
+    
+    - name: Save Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: build_${{ github.sha }}
+    
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Download Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: build_${{ github.sha }}
+    
+    - name: Deploy to GitHub Pages
+      run: npm run deploy
+      working-directory: sample-react-app
