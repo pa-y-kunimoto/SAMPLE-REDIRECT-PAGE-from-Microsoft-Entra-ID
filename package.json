@@ -26,7 +26,7 @@
 		"node": "22.11.0",
 		"npm": "10.9.0"
 	},
-	"os": ["win32", "linux"],
+	"os": ["win32", "linux", "darwin"],
 	"optionalDependencies": {
 		"@lmdb/lmdb-linux-x64": "^3.0.13",
 		"@lmdb/lmdb-win32-x64": "^3.0.13",
