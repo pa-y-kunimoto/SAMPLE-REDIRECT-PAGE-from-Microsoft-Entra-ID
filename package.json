@@ -12,7 +12,7 @@
 		"type": "git",
 		"url": "git+https://github.com/pa-y-kunimoto/SAMPLE-REDIRECT-PAGE-from-Microsoft-Entra-ID.git"
 	},
-	"keywords": ["react", "github-pages", "typescript"],
+	"keywords": ["react", "gh-pages", "typescript"],
 	"author": "pa-y-kunimoto",
 	"bugs": {
 		"url": "https://github.com/pa-y-kunimoto/SAMPLE-REDIRECT-PAGE-from-Microsoft-Entra-ID/issues"
@@ -20,7 +20,6 @@
 	"homepage": "https://github.com/pa-y-kunimoto/SAMPLE-REDIRECT-PAGE-from-Microsoft-Entra-ID#readme",
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
-		"gh-pages": "6.2.0",
 		"husky": "9.1.6"
 	},
 	"volta": {

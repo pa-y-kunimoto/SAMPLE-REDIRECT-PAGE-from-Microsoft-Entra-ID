@@ -27,8 +27,8 @@ jobs:
     - name: Prebuild
       run: npm run check
 
-    - name: Build
-      run: npm run predeploy
+    - name: Build Files for GitHub Pages
+      run: npm run build:for-gh-pages
       working-directory: sample-react-app
     
     - name: Upload Static Files as Artifact

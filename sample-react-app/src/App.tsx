@@ -1,37 +1,58 @@
-import { useState } from "react";
-import viteLogo from "/vite.svg";
-import reactLogo from "./assets/react.svg";
 import "./App.css";
+import { AdminConsentFailure } from "./components/AdminConsentFailure";
+import { AdminConsentSuccessful } from "./components/AdminConsentSuccessful";
 
 function App() {
-	const [count, setCount] = useState(0);
-
-	const handleClick = (): void => {
-		setCount((count) => count + 1);
-	};
+	const urlParams = new URLSearchParams(window.location.search);
+	const adminConsent = urlParams.get("admin_consent") as
+		| "True"
+		| "False"
+		| null;
+	const tenant = urlParams.get("tenant");
+	const error = urlParams.get("error");
+	const errorDescription = urlParams.get("error_description");
+	const errorUri = urlParams.get("error_uri");
 
 	return (
 		<>
-			<div>
-				<a href="https://vite.dev" target="_blank" rel="noreferrer">
-					<img src={viteLogo} className="logo" alt="Vite logo" />
-				</a>
-				<a href="https://react.dev" target="_blank" rel="noreferrer">
-					<img src={reactLogo} className="logo react" alt="React logo" />
-				</a>
+			<h1>SAMPLE REDIRECT PAGE</h1>
+			<div className="logo-wrapper">
+				<img
+					className="logo"
+					src="https://avatars.githubusercontent.com/u/66451487"
+					width="128"
+					height="128"
+					alt="pa-y-kunimoto"
+				/>
 			</div>
-			<h1>Vite + React</h1>
-			<div className="card">
-				<button type="button" onClick={handleClick}>
-					count is {count}
-				</button>
+			{adminConsent === "True" &&
+			!error &&
+			!errorDescription &&
+			!errorUri &&
+			tenant ? (
+				<AdminConsentSuccessful tenantId={tenant as string} />
+			) : (
+				<AdminConsentFailure
+					error={error || "Unable to grant admin consent"}
+					errorDescription={errorDescription || "An unknown error occurred"}
+					errorUri={errorUri || ""}
+				/>
+			)}
+			<footer>
 				<p>
-					Edit <code>src/App.tsx</code> and save to test HMR
+					This is a sample redirect page that demonstrates how to handle the
+					response from the admin consent endpoint in your app.
 				</p>
-			</div>
-			<p className="read-the-docs">
-				Click on the Vite and React logos to learn more
-			</p>
+				<p>
+					<a
+						href="https://github.com/pa-y-kunimoto/SAMPLE-REDIRECT-PAGE-from-Microsoft-Entra-ID"
+						target="_blank"
+						rel="noreferrer"
+					>
+						View the source code on GitHub
+					</a>
+				</p>
+			</footer>
 		</>
 	);
 }
